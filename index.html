@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<form id="z">
+	<input type="text" name="name">
+	<input type="submit">
+</form>
+<!-- Para poder establecer una comunicacion con un elemento php debemos
+hacerlo en un entorno lamp o en donde el codigo php sea interpretado 
+dicho esto debemos trabajar con un servidor local o su caso con un servidor remoto -->
+
+
+	<script type="text/javascript">
+       var form = document.getElementById('z');
+       
+
+        /*como ya sabemos addEventListener obtiene el
+        evento a lanzar ya sea click, submit, keyup
+        luego la funcion lanza los mandatos que se haran
+        luego hacer click en submit*/
+		 form.addEventListener('submit', function(o){
+                  o.preventDefault();
+         /* Con esta variable fol contruimos un obheto en 
+         donde creamos parametros o asignamos valores*/
+                  var fol ={name:'pocho', name2:'real'}
+         /* este constructor envia los parametros emulando
+         los resultados obtenidos de un formulario.... existe
+         otro metodo dat.append a investigar luego */         
+                  const dat = new URLSearchParams(fol);
+     	 /* Con este parametro que es el mas convencional
+     	 podemos obtener los datos que enviamos del formulario*/
+     	     var dae = new FormData(form); 
+
+         
+            
+             console.log(dat );
+			fetch("aver.php",{
+	       	method:'POST',
+	       	body:   dat
+	       })
+			/* Debemos saber como viajan los datos que estamos 
+			recibiendo si en un caso estamos recibiendo datos en 
+			formato de texto el parametro es .text() entonces si 
+			estamos recibiendo paramentros en un objeto entonces
+			debemos colocar JSON()*/
+	       .then(data=>data.text())
+	       .then(data=>{
+	       	console.log(data );
+	        
+	       })
+
+
+
+		 })
+		
+     
+	</script>
+</body>
+</html>

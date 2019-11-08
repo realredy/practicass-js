@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascrip</title>
+</head>
+<style>
+   
+.cuer{width: 50vh; height: 200px;  display:block; 
+position:relative; border:solid 1px black;  }
+.cuer > .circle{width:20px; height: 20px; border-radius:20px;
+border:dolid 1px red; background: black; position:absolute;}
+</style>
+<body>
+  <div class="cuer">
+             <div class="circle"></div>
+  </div>
+  
+  <script>
+     var num = 0;
+    // var num = Math.PI * 1;
+    var cuer = document.querySelector('.cuer');//cuerpo
+    var circ = document.querySelector('.circle');//grano
+    var anc = cuer.clientWidth - 20;//ancho cuerpo
+    var alt = cuer.clientHeight - 20;//alto cuerpo
+    var x = circ.clientLeft; //posicion original grano izq
+    var xgo = 1.5;
+    var y = circ.clientTop; //posicion original grano tope
+    var ygo = 1.5;
+     
+     function ml(){
+       x += xgo;
+       y += ygo;
+     }
+     function reb(){
+       if(x > anc || x < 0){
+         xgo = -xgo;
+       }
+     }
+
+     function reby(){
+      if(y > alt || y < 0){
+         ygo = -ygo;
+       }
+     }
+      
+    
+     function celestina(){
+       requestAnimationFrame(celestina);
+       circ.style.left = x +'px';
+       circ.style.top = y +'px';
+             ml();
+             reb();
+             reby();
+       console.log(x);
+      
+        
+     }
+     celestina();
+      
+
+  </script>
+
+</body>
+</html> 

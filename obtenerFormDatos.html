@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="fm">
+        
+           <input type="text" placeholder="name"  name="una">
+         <input type="text"  name="ps"> 
+        <input type="submit" name="enviar">
+    </form>
+    <script>
+        // seleccionamos el id del formulario en una variable
+        var n = document.querySelector('#fm');
+    //    con event listener o escuchar el evento de n que es el formu
+    //    lario, detectamos en click hecho en el submit luego de coma una 
+    //    funcion 
+             n.addEventListener('submit', function(e){
+                //  con prevent default evitamos que la pagina se refresque
+                 e.preventDefault();
+                // con este form data tenemos los datos que se obtendran desde
+                // el formulario
+                var nues = new FormData(n); 
+               
+                //   con get all podemos con un solo name obtener los valores de 
+                //   todos loa campos con el name igual 
+                     
+                  fetch('http://localhost/aver.php',{
+                      method:'POST',
+                      body : nues,
+                      headers:'aplication/json' })
+                  .then(data => data.json )
+                  .then(data =>{
+                      console.log(data)
+            
+                  });
+            });
+         
+    </script>
+</body>
+</html>
